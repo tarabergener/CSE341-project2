@@ -1,7 +1,8 @@
 const express = require('express');
+const mongodb = require('/data/database')
 const app = express();
 
-const port = 3030;
+const port = process.env.PORT || 3030;
 
 app.get('/', (req, res) =>{
     res.send('Hello');
@@ -9,5 +10,15 @@ app.get('/', (req, res) =>{
 
 app.use('/', require('./routes'));
 
-app.listen(process.env.port || port);
-console.log('Web Server is listening on port ' + (process.env.PORT || port))
+mongodb.initDb((err) => {
+    if(err) {
+        console.log(err);
+    } else {
+        app.listen(port, () => {console.log(`Database is listening and node Running on port ${port}`)});
+    }
+});
+
+//performs the same task as "app.listen(port, () => {console.log..." code above
+
+//app.listen(process.env.port || port);
+//console.log('Web Server is listening on port ' + (process.env.PORT || port))
