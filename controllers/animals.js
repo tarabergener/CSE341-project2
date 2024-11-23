@@ -80,7 +80,7 @@ const deleteAnimal = async (req, res) => {
         res.status(400).json('Must use a valid contact id to delete a contact.');
     }
     const userId = new ObjectId(req.params.id);
-    const response = await mongodb.getDatabase().db().collection('animals').deleteOne({ _id: userId });
+    const response = await mongodb.getDatabase().db().collection('animals').remove({ _id: userId }, true);
     if (response.deleteCount > 0) {
         res.status(204).send();
     } else {
