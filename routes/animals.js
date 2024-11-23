@@ -7,4 +7,10 @@ router.get('/', animalsController.getAll);
 
 router.get('/:id', animalsController.getSingle);
 
+router.post('/', animalsController.createAnimal);
+
+router.put('/:id', animalsController.updateAnimal);
+
+router.delete('/:id', animalsController.deleteAnimal);
+
 module.exports = router;

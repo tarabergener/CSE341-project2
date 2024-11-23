@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-    const userId = new ObjectId(req.params.id)
+    const userId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('animals').find({ _id: userId });
     result.toArray(). then((animals) => {
         res.setHeader('Content-Type', 'application/json');
@@ -18,7 +18,58 @@ const getSingle = async (req, res) => {
     });
 };
 
+const createAnimal = async (req, res) => {
+    const animal = {
+        name: req.body.name,
+        scientificName: req.body.scientificName,
+        kingdom: req.body.kingdom,
+        class: req.body.class,
+        size: req.body.size,
+        population: req.body.population,
+        endangered: req.body.endangered
+    };
+    const response = await mongodb.getDatabase().db().collection('animals').insertOne(animal);
+    if (response.acknowledged) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error has occured adding a new animal.')
+    };
+};
+
+const updateAnimal = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+    const animal = {
+        name: req.body.name,
+        scientificName: req.body.scientificName,
+        kingdom: req.body.kingdom,
+        class: req.body.class,
+        size: req.body.size,
+        population: req.body.population,
+        endangered: req.body.endangered
+    };
+    const response = await mongodb.getDatabase().db().collection('animals').replaceOne({ _id: userId }, user);
+    if (response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error has occured updating an animal.')
+    };
+};
+
+const deleteAnimal = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+    const response = await mongodb.getDatabase().db().collection('animals').deleteOne({ _id: userId });
+    if (response.deleteCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error has occured deleting an animal.')
+    };
+};
+
+
 module.exports = {
     getAll,
-    getSingle
+    getSingle,
+    createAnimal,
+    updateAnimal,
+    deleteAnimal
 };
