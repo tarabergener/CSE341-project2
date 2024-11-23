@@ -1,9 +1,31 @@
 const express = require('express');
-
-const mongodb = require('./data/database')
+const bodyParser = require('body-parser');
+const mongodb = require('./data/database');
+const cors = require('cors');
+const { createAnimal, updateAnimal, deleteAnimal } = require('./validation.js');
 const app = express();
 
 const port = process.env.PORT || 3030;
+
+app.use(cors());
+app.get('/', (req, res) => {
+    res.send('Node js file upload rest apis');
+});
+
+//app.post('/animals', createAnimal, (req, res, next) => {
+
+//})
+
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, 2-Key'
+    );
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
+});
 
 app.use('/', require('./routes'));
 

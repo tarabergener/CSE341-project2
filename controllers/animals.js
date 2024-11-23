@@ -47,7 +47,7 @@ const updateAnimal = async (req, res) => {
         population: req.body.population,
         endangered: req.body.endangered
     };
-    const response = await mongodb.getDatabase().db().collection('animals').replaceOne({ _id: userId }, user);
+    const response = await mongodb.getDatabase().db().collection('animals').replaceOne({ _id: userId }, animal);
     if (response.modifiedCount > 0) {
         res.status(204).send();
     } else {

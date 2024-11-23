@@ -1,0 +1,19 @@
+### Get all animals
+GET https://cse341-project2-jpcc.onrender.com/animals
+
+### Get animal by id
+GET https://cse341-project2-jpcc.onrender.com/animals/673f2e33b3479d9aeb06a609
+
+### Create new animal
+POST https://cse341-project2-jpcc.onrender.com/animals HTTP/1.1
+content-type: application/json
+
+{
+    "name":"shark",
+    "scientificName":"Selachimorpha",
+    "kingdom":"Animalia",
+    "class":"Chondrichthyes",
+    "size": "18ft",
+    "population": "150000",
+    "endangered": "False"
+}
