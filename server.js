@@ -1,28 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./data/database');
-const cors = require('cors');
-const { createValidation, updateValidation, deleteValidation } = require('./validation.js');
 const app = express();
 
 const port = process.env.PORT || 3030;
-
-app.use(cors());
-app.get('/', (req, res) => {
-    res.send('Node js file upload rest apis');
-});
-
-//app.post('/animals', createValidation, (req, res, next) => {
-
-//});
-
-//app.post('/animals', updateValidation, (req, res, next) => {
-    
-//});
-
-//app.post('/animals', deleteValidaiton, (req, res, next) => {
-    
-//});
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
