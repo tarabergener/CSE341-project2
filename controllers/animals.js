@@ -1,20 +1,37 @@
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAll = async (req, res) => {
-    const result = await mongodb.getDatabase().db().collection('animals').find();
-    result.toArray(). then((animals) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(animals);
+const getAll = (req, res) => {
+    mongodb
+        .getDatabase()
+        .db()
+        .collection('animals')
+        .find()
+        .toArray((err, animals) => {
+            if (err) {
+                res.status(400).json({ message: err });
+            }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(animals);
     });
 };
 
-const getSingle = async (req, res) => {
+const getSingle = (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid contact id to find an animal.');
+    }
     const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('animals').find({ _id: userId });
-    result.toArray(). then((animals) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(animals[0]);
+    mongodb
+        .getDatabase()
+        .db()
+        .collection('animals')
+        .find({ _id: userId })
+        .toArray((err, animals) => {
+            if (err) {
+                res.status(400).json({ message: err });
+            }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(animals[0]);
     });
 };
 
@@ -37,6 +54,9 @@ const createAnimal = async (req, res) => {
 };
 
 const updateAnimal = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid contact id when updating a contact.');
+      }
     const userId = new ObjectId(req.params.id);
     const animal = {
         name: req.body.name,
@@ -56,6 +76,9 @@ const updateAnimal = async (req, res) => {
 };
 
 const deleteAnimal = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid contact id to delete a contact.');
+    }
     const userId = new ObjectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('animals').deleteOne({ _id: userId });
     if (response.deleteCount > 0) {

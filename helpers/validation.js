@@ -1,4 +1,5 @@
 const { check } = require('express-validator');
+
 exports.createAnimal = [
     check('name', 'Name is required').not().isEmpty(),
     check('scientificName', 'Scientific name is required').not().isEmpty(),
@@ -17,8 +18,4 @@ exports.updateAnimal = [
     check('size', 'Size is required in feet (ex. 5ft)').isString(),
     check('population', 'Population must be a number. Do not include commas.').isInt(),
     check('endangered', 'Endangered must be true or false.').isBoolean()
-]
-
-exports.deleteAnimal = [
-    
 ]
