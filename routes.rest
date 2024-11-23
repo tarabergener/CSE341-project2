@@ -9,11 +9,28 @@ POST https://cse341-project2-jpcc.onrender.com/animals HTTP/1.1
 content-type: application/json
 
 {
-    "name":"shark",
+    "name":"Tiger shark",
     "scientificName":"Selachimorpha",
     "kingdom":"Animalia",
     "class":"Chondrichthyes",
     "size": "18ft",
     "population": "150000",
-    "endangered": "False"
+    "endangered": "false"
 }
+
+### Update existing animal
+PUT https://cse341-project2-jpcc.onrender.com/animals/673f2e33b3479d9aeb06a609 HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Rattlesnake",
+    "scientificName":"Crotalus",
+    "kingdom":"Animalia",
+    "class":"Reptilia",
+    "size": "6.5ft",
+    "population": "1500000",
+    "endangered": "false"
+}
+
+### Delete existing animal
+###DELETE https://cse341-project2-jpcc.onrender.com/animals/
