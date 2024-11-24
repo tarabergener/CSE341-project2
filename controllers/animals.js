@@ -1,37 +1,22 @@
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAll = (req, res) => {
-    mongodb
-        .getDatabase()
-        .db()
-        .collection('animals')
-        .find()
-        .toArray((err, animals) => {
-            if (err) {
-                res.status(400).json({ message: err });
-            }
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(animals);
+const getAll = async (req, res) => {
+    //#swagger.tags=['Users']
+    const result = await mongodb.getDatabase().db().collection('animals').find();
+    result.toArray().then((users) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(animals);
     });
 };
 
-const getSingle = (req, res) => {
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid contact id to find an animal.');
-    }
+const getSingle = async (req, res) => {
+    //#swagger.tags=['Users']
     const userId = new ObjectId(req.params.id);
-    mongodb
-        .getDatabase()
-        .db()
-        .collection('animals')
-        .find({ _id: userId })
-        .toArray((err, animals) => {
-            if (err) {
-                res.status(400).json({ message: err });
-            }
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(animals[0]);
+    const result = await mongodb.getDatabase().db().collection('animals').find({ _id: userId });
+    result.toArray().then((animals) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(users[0]);
     });
 };
 
@@ -85,7 +70,7 @@ const deleteAnimal = async (req, res) => {
         res.status(204).send();
     } else {
         res.status(500).json(response.error || 'Some error has occured deleting an animal.')
-    };
+    }
 };
 
 

@@ -33,4 +33,4 @@ content-type: application/json
 }
 
 ### Delete existing animal
-DELETE https://cse341-project2-jpcc.onrender.com/animals/67429688977daf4675b9e302
+DELETE https://cse341-project2-jpcc.onrender.com/animals/67429688977daf4675b9e302 HTTP/1.1
