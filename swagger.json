@@ -7,7 +7,7 @@
   },
   "host": "localhost:3001",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["http"],
   "paths": {
     "/api-docs": {
       "get": {

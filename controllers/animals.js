@@ -68,9 +68,10 @@ const deleteAnimal = async (req, res) => {
     const response = await mongodb.getDatabase().db().collection('animals').deleteOne({ _id: userId });
     if (response.deleteCount > 0) {
         res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error has occured deleting an animal.')
-    }
+    } 
+    //else {
+    //    res.status(500).json(response.error || 'Some error has occured deleting an animal.')
+    //}
 };
 
 

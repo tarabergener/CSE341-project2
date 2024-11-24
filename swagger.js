@@ -6,7 +6,7 @@ const doc = {
         description: 'Animals Api'
     },
     host: 'localhost:3001',
-    schemes: ['https', 'http']
+    schemes: ['http']
 };
 
 const outputFile = './swagger.json';
