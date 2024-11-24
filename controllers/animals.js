@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 const getAll = async (req, res) => {
     //#swagger.tags=['Users']
     const result = await mongodb.getDatabase().db().collection('animals').find();
-    result.toArray().then((users) => {
+    result.toArray().then((animals) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(animals);
     });
