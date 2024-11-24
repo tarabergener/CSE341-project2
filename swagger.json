@@ -5,9 +5,9 @@
     "description": "Animals Api",
     "version": "1.0.0"
   },
-  "host": "localhost:3030",
+  "host": "localhost:3001",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["http", "https"],
   "paths": {
     "/api-docs": {
       "get": {
