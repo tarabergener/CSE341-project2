@@ -13,10 +13,10 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     //#swagger.tags=['Users']
     const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('animals').find({ _id: userId });
+    const result = await mongodb.getDatabase().db().collection('animals').find({ _id: userId }, animal);
     result.toArray().then((animals) => {
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(users[0]);
+        res.status(200).json(animals[0]);
     });
 };
 
@@ -69,9 +69,9 @@ const deleteAnimal = async (req, res) => {
     if (response.deleteCount > 0) {
         res.status(204).send();
     } 
-    //else {
-    //    res.status(500).json(response.error || 'Some error has occured deleting an animal.')
-    //}
+    else {
+        res.status(500).json(response.error || 'Some error has occured deleting an animal.')
+    }
 };
 
 
