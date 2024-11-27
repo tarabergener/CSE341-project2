@@ -31,7 +31,7 @@ app
     next();
     })
     .use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']}))
-    .use(corse({ origin: '*'}))
+    .use(cors({ origin: '*'}))
     .use('/', require('./routes/index.js'))
 
 passport.use(new GitHubStrategy({
@@ -40,13 +40,30 @@ passport.use(new GitHubStrategy({
     callbackURL: process.env.CALLBACK_URL
 },
 function(accessToken, refreshToken, profile, done) {
+  //This function would add or create a user from information we get in GitHub  
   //User.findOrCreat({ githubId: profile.id }, function (err, user) {  
     return done(null, profile);
   //})  
 }
 ))
 
-app.use('/', require('./routes'));
+//app.use('/', require('./routes'));
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+passport.deserializeUser((user, done) => {
+    done(null, user);
+});
+
+app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : 'Logged Out')});
+
+app.get('/github/callback', passport.authenticate('github', {
+    failureRedirect: '/api-docs', session: false}),
+    (req, res) => {
+        req.session.user = req.user;
+        res.redirect('/');
+});
 
 process.on('uncaughtException', (err, origin) => {
     console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
