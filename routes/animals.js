@@ -10,10 +10,10 @@ router.get('/', animalsController.getAll);
 
 router.get('/:id', animalsController.getSingle);
 
-router.post('/', validation.saveAnimal, animalsController.createAnimal);
+router.post('/', isAuthenticated, validation.saveAnimal, animalsController.createAnimal);
 
-router.put('/:id', validation.saveAnimal, animalsController.updateAnimal);
+router.put('/:id', isAuthenticated, validation.saveAnimal, animalsController.updateAnimal);
 
-router.delete('/:id', animalsController.deleteAnimal);
+router.delete('/:id', isAuthenticated, animalsController.deleteAnimal);
 
 module.exports = router;
