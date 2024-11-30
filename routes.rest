@@ -1,5 +1,6 @@
 ### Get all animals
-GET https://cse341-project2-jpcc.onrender.com/animals
+###GET https://cse341-project2-jpcc.onrender.com/animals
+GET localhost:3030
 
 ### Get animal by id
 GET https://cse341-project2-jpcc.onrender.com/animals/673f2e33b3479d9aeb06a609
