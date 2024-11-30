@@ -7,8 +7,8 @@ const saveAnimal = (req, res, next) => {
     kingdom: 'required|string',
     class: 'required|string',
     size: 'required|string',
-    population: 'required',
-    endangered: 'required'
+    population: 'required|integer',
+    endangered: 'required|boolean'
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
