@@ -4,7 +4,7 @@ const router = express.Router();
 const animalsController = require('../controllers/animals');
 const validation = require('../middleware/validate');
 
-//const { isAuthenticated } = require('../middleware/authenticate');
+const { isAuthenticated } = require('../middleware/authenticate');
 
 router.get('/', animalsController.getAll);
 

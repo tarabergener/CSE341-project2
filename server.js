@@ -69,6 +69,7 @@ process.on('uncaughtException', (err, origin) => {
     console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
 });
 
+//What port my database is running on
 mongodb.initDb((err) => {
     if(err) {
         console.log(err);
