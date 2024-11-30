@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = (req, res) => {
     mongodb
-      .getDb()
+      .getDatabase()
       .db()
       .collection('animals')
       .find()
