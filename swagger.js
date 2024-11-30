@@ -5,7 +5,7 @@ const doc = {
         title: 'Animals Api',
         description: 'Animals Api'
     },
-    host: 'localhost:3030',
+    host: 'cse341-project2-jpcc.onrender.com',
     schemes: [ 
         'https'
     ]
