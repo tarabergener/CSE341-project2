@@ -2,7 +2,6 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
-    const userId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('animals').find();
     result.toArray().then((animals) => {
         res.setHeader('Content-Type', 'application/json');
