@@ -6,8 +6,7 @@ const doc = {
         description: 'Animals Api'
     },
     host: 'localhost:3030',
-    schemes: [
-        'http', 
+    schemes: [ 
         'https'
     ]
 };
